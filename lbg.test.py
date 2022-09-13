@@ -35,20 +35,33 @@ class MyLbgApiTestCase(unittest.TestCase):
         Create (Post) request.  Note.  API will need to be running(!)
         """
         response = requests.post(BASE_URL + '/create', json = {'name': 'Tool', 'description': 'Hammer', 'price': 10.5})
+        self.assertEqual(response.status_code, HTTP_200_OK)
 
     @unittest.skip("Skip this test for now using this decorator...")
     def test_create_post_request_type(self):
         """
-        Test to see if RESTful API returns an objectfor a simple
+        Test to see if RESTful API returns an object for a simple
         Create (Post) request.  Note.  API will need to be running(!)
         """
         response = requests.post(BASE_URL + '/create', json = {'name': 'Vegetable', 'description': 'Leek', 'price': .7})
         self.assertIsInstance(response, object)
+    
+    #verify object returned by api is a valid api response
+
+    def test_response_contains_expected_json_fields(self):
+        """
+        Test to see if RESTful API returns an object with the correct fields for a simple
+        Read (GET) request.  Note.  API will need to be running(!)
+        """
+        item = requests.post(BASE_URL + '/create', json = {'name': 'Vegetable', 'description': 'Leek', 'price': .7})
+        response = requests.get(BASE_URL + '/read/3')
+        self.assertEqual(response.json(), {"_id":3, 'name': 'Vegetable', 'description': 'Leek', 'price': .7})
     
     @classmethod
     def tearDownClass(cls):
         requests.delete(BASE_URL + '/delete/1')
 
 # module import protection
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)
