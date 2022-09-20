@@ -13,7 +13,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                ssh -i '~/.ssh/authorized_keys' jenkins@35.242.145.153 << EOF
+                ssh -i '~/.ssh/jenkin_key' jenkins@35.242.145.153 << EOF
                 docker stop lbg-container
                 docker rm lbg-container
                 docker run -d -p 8080:8080 --name lbg-container imcalled/lbg-api:latest
