@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                docker build -t imcalled/lbg-api:latest -t imcalled/lbg-api:$ .
+                docker build -t imcalled/lbg-api:latest -t imcalled/lbg-api:$BUILD_NUMBER . 
                 docker push imcalled/lbg-api:latest
                 docker push imcalled/lbg-api:$build_number
                 '''
