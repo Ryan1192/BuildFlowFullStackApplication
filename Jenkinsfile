@@ -7,6 +7,8 @@ pipeline {
                 docker build -t lbg7-20220905/lbg-api:latest -t imcalled/lbg-api:$BUILD_NUMBER . 
                 docker push lbg7-20220905/lbg-api:latest
                 docker push lbg7-20220905/lbg-api:$BUILD_NUMBER
+                docker tag lbg7-20220905/lbg-api:latest gcr.io/lbg7-20220905/kun-lbg:v1
+                docker push lbg7-20220905/lbg-api:latest gcr.io/lbg7-20220905/kun-lbg:v1
                 '''
            }
         }

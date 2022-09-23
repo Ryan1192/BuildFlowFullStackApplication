@@ -1,5 +1,5 @@
 #!/bin/bash/
-docker build -t imcalled/lbg-api:latest .
+docker build -t imcalled/lbg-api:latest . 
 docker push imcalled/lbg-api:latest
 
 docker stop lbg-container
